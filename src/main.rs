@@ -1,4 +1,6 @@
-// Needed for debug for CreateUser -- it's unclear why since this is used.
+// main.rs
+
+// This is needed for CreateUser, though it's not clear why
 #![allow(dead_code)]
 
 use serde::{Serialize, Deserialize};
@@ -13,7 +15,7 @@ struct CreateUser {
     password: String,
 }
 
-// Input to get
+// Output from post.  Password is now hidden, and a user ID is added
 #[derive(Serialize)]
 struct User {
     email: String,
@@ -38,7 +40,7 @@ async fn main() {
 
 async fn get_user(Path(user_id) : Path<u32>) -> Json<User>  {
     // Actually look up user from id, etc.
-    Json(User{email: "everyman@ubiquitous.com".to_string(), id: user_id})
+    Json(User{email: "everyone@ubiquitous.com".to_string(), id: user_id})
 }
 
 async fn create_user(Json(payload): Json<CreateUser>) {
